@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тесты для 7 класса</title>
+    <style>
+      /* Общие стили для страницы */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100%;
+      }
+
+      /* Фон страницы */
+      .background {
+        background: url("class.png") no-repeat center center fixed;
+        background-size: cover; /* Растягиваем изображение, чтобы оно покрывало весь экран */
+        position: relative;
+        height: 100%;
+        opacity: 0.8; /* Полупрозрачность фона */
+      }
+
+      /* Заголовок меню */
+      header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон для меню */
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      header h1 {
+        color: white;
+        margin: 0;
+        font-size: 2em;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      nav ul li {
+        display: inline;
+        margin: 0 20px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.2em;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #ff9800; /* Цвет при наведении */
+      }
+
+      /* Основной контент */
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100% - 150px); /* Оставляем место для меню */
+        text-align: center;
+        color: white;
+      }
+
+      .content {
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.7
+        ); /* Полупрозрачный фон для текста */
+        padding: 40px;
+        border-radius: 10px;
+        max-width: 600px;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <!-- Используем класс "background" для фона -->
+      <header>
+        <div class="container">
+          <h1>Тесты по математике для 7 класса</h1>
+          <nav>
+            <ul>
+              <li><a href="test1.html">Тема 1: Алгебра</a></li>
+              <li><a href="test2.html">Тема 2: Геометрия</a></li>
+              <li>
+                <a href="test3.html">Тема 3: Сложение и вычитание дробей</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <div class="content">
+          <h2>Добро пожаловать!</h2>
+          <p>
+            Выберите один из тестов, чтобы начать. Каждый тест состоит из трех
+            заданий, сложность которых увеличивается.
+          </p>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2026 Тесты для 7 класса</p>
+      </footer>
+    </div>
+  </body>
+</html>

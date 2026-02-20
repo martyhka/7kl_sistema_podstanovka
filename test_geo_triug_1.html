@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Тест (7 класс): Системы линейных уравнений — метод подстановки
+    </title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --card: #111c34;
+        --card2: #0b1428;
+        --text: #e5e7eb;
+        --muted: #a7b0c0;
+        --line: #24324f;
+        --ok: #22c55e;
+        --bad: #ef4444;
+        --warn: #f59e0b;
+        --btn: #3b82f6;
+        --btn2: #1f2937;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        background: radial-gradient(
+          1200px 700px at 20% 10%,
+          #1b2a5a 0%,
+          var(--bg) 60%
+        );
+        color: var(--text);
+        padding: 20px;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      header {
+        padding: 18px 18px 8px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.02)
+        );
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+      }
+      .sub {
+        color: var(--muted);
+        margin: 0 0 10px;
+        line-height: 1.35;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px 10px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .card {
+        margin-top: 16px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(17, 28, 52, 0.75);
+        overflow: hidden;
+      }
+      .card-h {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .card-h b {
+        font-size: 15px;
+      }
+      .task {
+        padding: 14px 16px 16px;
+        border-top: 1px solid var(--line);
+      }
+      .task:first-child {
+        border-top: none;
+      }
+      .sys {
+        font-size: 16px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px dashed rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 10px 12px;
+        margin: 8px 0 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+        gap: 10px;
+        align-items: end;
+      }
+      label {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        outline: none;
+      }
+      input[type="text"]:focus {
+        border-color: rgba(59, 130, 246, 0.9);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 8px;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 14px 16px;
+        border-top: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.12);
+      }
+      button {
+        border: 0;
+        padding: 10px 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        color: white;
+        background: var(--btn);
+      }
+      button.secondary {
+        background: var(--btn2);
+        border: 1px solid var(--line);
+        color: var(--text);
+      }
+      button:active {
+        transform: translateY(1px);
+      }
+      .result {
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(11, 20, 40, 0.7);
+        padding: 14px 16px;
+      }
+      .score {
+        font-size: 18px;
+        font-weight: 800;
+        margin: 0 0 6px;
+      }
+      .small {
+        color: var(--muted);
+        margin: 0;
+      }
+      .mark {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        border: 1px solid transparent;
+      }
+      .ok {
+        background: rgba(34, 197, 94, 0.12);
+        border-color: rgba(34, 197, 94, 0.35);
+        color: #a7f3d0;
+      }
+      .bad {
+        background: rgba(239, 68, 68, 0.12);
+        border-color: rgba(239, 68, 68, 0.35);
+        color: #fecaca;
+      }
+      details {
+        margin-top: 10px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      details summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .explain {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+        margin-top: 8px;
+      }
+      .footer-note {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Тест (7 класс): Системы линейных уравнений — метод подстановки</h1>
+        <p class="sub">
+          Инструкция: решите систему и запишите ответ в поля. Можно вводить
+          целые числа или дроби (например: <b>-3</b>, <b>1/2</b>, <b>2.5</b>).
+          Проверка учитывает дроби.
+        </p>
+        <div class="row">
+          <div class="chip">Тема: системы уравнений</div>
+          <div class="chip">Метод: подстановка</div>
+          <div class="chip">Ответ: (x; y) или (a; b)</div>
+          <div class="chip">Время: 10–15 минут</div>
+        </div>
+      </header>
+
+      <div class="card" id="testCard">
+        <div class="card-h">
+          <b>Задания</b>
+          <span class="chip" id="variantChip">Вариант: базовый</span>
+        </div>
+
+        <!-- Задания будут вставлены сюда -->
+        <div id="tasks"></div>
+
+        <div class="controls">
+          <button id="checkBtn">Проверить</button>
+          <button class="secondary" id="resetBtn">Сбросить</button>
+          <button class="secondary" id="shuffleBtn">Перемешать задания</button>
+        </div>
+      </div>
+
+      <div class="result" id="resultBox" style="display: none">
+        <p class="score" id="scoreLine"></p>
+        <p class="small" id="commentLine"></p>
+
+        <details id="answersDetails">
+          <summary>Показать правильные ответы и краткие подсказки</summary>
+          <div id="answersList" class="explain"></div>
+        </details>
+
+        <p class="footer-note">
+          Подсказка учителю: можно дать ученикам сначала решать на черновике, а
+          затем занести ответы в поля.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // ---------- ДАННЫЕ ЗАДАНИЙ ----------
+      // Примеры похожи на фото: линейные системы 2x2.
+      // В каждом задании: переменные, текст системы, правильный ответ, и короткая подсказка (идея подстановки).
+      const BANK = [
+        {
+          id: "t1",
+          vars: ["x", "y"],
+          system: `{ x - 5y = 8
+{ 2x + 4y = 30`,
+          ans: { x: 13, y: 1 },
+          hint: "Вырази x из 1-го уравнения: x = 8 + 5y. Подставь во 2-е.",
+        },
+        {
+          id: "t2",
+          vars: ["x", "y"],
+          system: `{ 2x - y = 1
+{ 7x - 6y = 4`,
+          ans: { x: 2, y: 3 },
+          hint: "Вырази y из 1-го: y = 2x - 1. Подставь во 2-е.",
+        },
+        {
+          id: "t3",
+          vars: ["a", "b"],
+          system: `{ 5a - 3b = 14
+{ 2a + b = 10`,
+          ans: { a: 4, b: 2 },
+          hint: "Из 2-го: b = 10 - 2a. Подставь в 1-е.",
+        },
+        {
+          id: "t4",
+          vars: ["x", "y"],
+          system: `{ 2x - 3y = 2
+{ 4x - 5y = 1`,
+          ans: { x: -7, y: -16 / 3 }, // -5.333...
+          hint: "Из 1-го вырази x: 2x = 2 + 3y → x = 1 + (3/2)y. Подставь во 2-е.",
+        },
+        // Доп. задания (чтобы было полноценное проверочное)
+        {
+          id: "t5",
+          vars: ["x", "y"],
+          system: `{ x + y = 9
+{ 3x - y = 7`,
+          ans: { x: 4, y: 5 },
+          hint: "Из 1-го: y = 9 - x. Подставь во 2-е.",
+        },
+        {
+          id: "t6",
+          vars: ["x", "y"],
+          system: `{ 5x + y = 1
+{ 2x - y = 8`,
+          ans: { x: 3, y: -14 },
+          hint: "Из 2-го: y = 2x - 8 (со знаком аккуратно!). Подставь в 1-е.",
+        },
+        {
+          id: "t7",
+          vars: ["x", "y"],
+          system: `{ x - 2y = -6
+{ 4x + y = 9`,
+          ans: { x: 12 / 9, y: 33 / 9 }, // x=4/3, y=11/3
+          hint: "Из 1-го: x = -6 + 2y. Подставь во 2-е.",
+        },
+        {
+          id: "t8",
+          vars: ["x", "y"],
+          system: `{ 3x + 2y = 16
+{ x - y = 1`,
+          ans: { x: 18 / 5, y: 13 / 5 }, // 3.6 и 2.6
+          hint: "Из 2-го: x = y + 1. Подставь в 1-е.",
+        },
+      ];
+
+      // По умолчанию: 6 заданий (можно менять)
+      let tasks = BANK.slice(0, 6);
+
+      // ---------- УТИЛИТЫ ----------
+      function gcd(a, b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
+        while (b) {
+          const t = a % b;
+          a = b;
+          b = t;
+        }
+        return a || 1;
+      }
+
+      // Парсинг числа: " -3 ", "1/2", "2.5", " -16/3 "
+      function parseNumber(str) {
+        if (str == null) return null;
+        const s = String(str).trim().replace(",", ".");
+        if (s === "") return null;
+
+        // дробь a/b
+        if (s.includes("/")) {
+          const parts = s.split("/");
+          if (parts.length !== 2) return null;
+          const n = Number(parts[0].trim());
+          const d = Number(parts[1].trim());
+          if (!Number.isFinite(n) || !Number.isFinite(d) || d === 0)
+            return null;
+          return n / d;
+        }
+
+        const x = Number(s);
+        if (!Number.isFinite(x)) return null;
+        return x;
+      }
+
+      function nearlyEqual(a, b, eps = 1e-9) {
+        return Math.abs(a - b) <= eps;
+      }
+
+      function formatNice(x) {
+        // Красивый вывод: если близко к целому — показываем целое,
+        // если похоже на простую дробь (знаменатель до 12) — покажем дробью,
+        // иначе десятичное с 3 знаками.
+        if (!Number.isFinite(x)) return String(x);
+
+        const r = Math.round(x);
+        if (nearlyEqual(x, r)) return String(r);
+
+        // пробуем подобрать дробь p/q
+        const maxQ = 12;
+        let best = null;
+        for (let q = 2; q <= maxQ; q++) {
+          const p = Math.round(x * q);
+          const val = p / q;
+          if (nearlyEqual(val, x, 1e-10)) {
+            const g = gcd(p, q);
+            best = { p: p / g, q: q / g };
+            break;
+          }
+        }
+        if (best) {
+          return `${best.p}/${best.q}`;
+        }
+
+        return x.toFixed(3).replace(/\.?0+$/, "");
+      }
+
+      // ---------- РЕНДЕР ----------
+      const tasksBox = document.getElementById("tasks");
+      const resultBox = document.getElementById("resultBox");
+      const scoreLine = document.getElementById("scoreLine");
+      const commentLine = document.getElementById("commentLine");
+      const answersList = document.getElementById("answersList");
+
+      function render() {
+        tasksBox.innerHTML = "";
+        tasks.forEach((t, idx) => {
+          const [v1, v2] = t.vars;
+
+          const el = document.createElement("div");
+          el.className = "task";
+          el.innerHTML = `
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+            <div><b>Задание ${idx + 1}.</b> Решите систему методом подстановки.</div>
+            <span id="mark_${t.id}" class="mark" style="display:none;"></span>
+          </div>
+
+          <div class="sys">${t.system}</div>
+
+          <div class="grid">
+            <div>
+              <label for="in_${t.id}_${v1}">Введите ${v1}</label>
+              <input type="text" id="in_${t.id}_${v1}" placeholder="например: 3 или -1/2">
+            </div>
+            <div>
+              <label for="in_${t.id}_${v2}">Введите ${v2}</label>
+              <input type="text" id="in_${t.id}_${v2}" placeholder="например: 5 или 2.5">
+            </div>
+          </div>
+
+          <div class="hint">Проверка: укажите пару (${v1}; ${v2}).</div>
+        `;
+          tasksBox.appendChild(el);
+        });
+
+        // скрываем прошлый результат при новом рендере
+        resultBox.style.display = "none";
+      }
+
+      // ---------- ПРОВЕРКА ----------
+      function check() {
+        let correct = 0;
+        let total = tasks.length;
+
+        const details = [];
+        tasks.forEach((t, idx) => {
+          const [v1, v2] = t.vars;
+          const in1 = document.getElementById(`in_${t.id}_${v1}`).value;
+          const in2 = document.getElementById(`in_${t.id}_${v2}`).value;
+
+          const a1 = parseNumber(in1);
+          const a2 = parseNumber(in2);
+
+          const true1 = t.ans[v1];
+          const true2 = t.ans[v2];
+
+          const ok =
+            a1 !== null &&
+            a2 !== null &&
+            nearlyEqual(a1, true1) &&
+            nearlyEqual(a2, true2);
+
+          const mark = document.getElementById(`mark_${t.id}`);
+          mark.style.display = "inline-block";
+
+          if (ok) {
+            correct++;
+            mark.textContent = "Верно";
+            mark.className = "mark ok";
+          } else {
+            mark.textContent = "Ошибка";
+            mark.className = "mark bad";
+          }
+
+          details.push(`
+          <div style="margin: 8px 0 10px;">
+            <b>Задание ${idx + 1}.</b> Ответ: (${v1}; ${v2}) = (${formatNice(true1)}; ${formatNice(true2)}).<br>
+            <span style="color: var(--muted);">Подсказка:</span> ${t.hint}
+          </div>
+        `);
+        });
+
+        // Итог
+        resultBox.style.display = "block";
+        scoreLine.textContent = `Результат: ${correct} из ${total}`;
+        const percent = Math.round((correct / total) * 100);
+
+        let comment = "";
+        if (percent === 100) comment = "Отлично! Все системы решены верно.";
+        else if (percent >= 75)
+          comment =
+            "Хорошо. Проверь аккуратность вычислений и знаки при подстановке.";
+        else if (percent >= 50)
+          comment =
+            "Нужно потренироваться: чаще всего ошибки в выражении переменной и переносе членов.";
+        else
+          comment =
+            "Рекомендуется повторить метод подстановки и решить ещё несколько примеров.";
+
+        commentLine.textContent = `Процент: ${percent}%. ${comment}`;
+        answersList.innerHTML = details.join("");
+      }
+
+      function reset() {
+        tasks.forEach((t) => {
+          t.vars.forEach((v) => {
+            const input = document.getElementById(`in_${t.id}_${v}`);
+            if (input) input.value = "";
+          });
+          const mark = document.getElementById(`mark_${t.id}`);
+          if (mark) {
+            mark.style.display = "none";
+            mark.textContent = "";
+          }
+        });
+        resultBox.style.display = "none";
+      }
+
+      function shuffle() {
+        // Перемешиваем текущий набор задач
+        for (let i = tasks.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [tasks[i], tasks[j]] = [tasks[j], tasks[i]];
+        }
+        render();
+      }
+
+      document.getElementById("checkBtn").addEventListener("click", check);
+      document.getElementById("resetBtn").addEventListener("click", reset);
+      document.getElementById("shuffleBtn").addEventListener("click", shuffle);
+
+      render();
+    </script>
+  </body>
+</html>
