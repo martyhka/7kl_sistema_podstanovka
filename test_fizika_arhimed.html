@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контрольная работа по физике</title>
+    <style>
+      body {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(
+          135deg,
+          #2c3e50 0%,
+          #34495e 50%,
+          #2c3e50 100%
+        );
+        min-height: 100%;
+        color: #ecf0f1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .task-container {
+        background-color: rgba(44, 62, 80, 0.8);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .task {
+        margin-bottom: 20px;
+      }
+
+      .task label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .task input {
+        width: 100%;
+        max-width: 250px;
+        padding: 10px;
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border: 1px solid #ecf0f1;
+        background-color: rgba(52, 73, 94, 0.6);
+        color: #ecf0f1;
+      }
+
+      .task button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #1abc9c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .task button:hover {
+        transform: translateY(-5px);
+      }
+
+      .result {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .result.correct {
+        color: green;
+      }
+
+      .result.incorrect {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Контрольная работа по физике: Архимедова сила</h1>
+
+    <div class="task-container">
+      <h2>Вариант 1</h2>
+
+      <div class="task">
+        <label for="task1"
+          >Задача 1: Металлический цилиндр объемом 150 см³ полностью погружен в
+          воду. Определите архимедову силу, действующую на цилиндр.</label
+        >
+        <input type="number" id="task1" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(1, 0.15)">Проверить</button>
+        <div id="result1" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task2"
+          >Задача 2: Чему равна архимедова сила, действующая на тело объемом 3
+          м³, если оно на половину погружено в воду?</label
+        >
+        <input type="number" id="task2" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(2, 29.4)">Проверить</button>
+        <div id="result2" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task3"
+          >Задача 3: Вычислите подъемную силу, действующую на объект в виде
+          прямоугольного параллелепипеда размером 6 × 4 × 5 см, при его полном
+          погружении в воду.</label
+        >
+        <input type="number" id="task3" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(3, 0.24)">Проверить</button>
+        <div id="result3" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task4"
+          >Задача 4: Деревянный брусок весом 10 Н выталкивает 4 литра воды.
+          Определите подъемную силу, действующую на брусок.</label
+        >
+        <input type="number" id="task4" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(4, 39.2)">Проверить</button>
+        <div id="result4" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task5"
+          >Задача 5: Тело, полностью погруженное в воду, имеет выталкивающую
+          силу 2 Н. Определите массу этого тела.</label
+        >
+        <input type="number" id="task5" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(5, 0.2)">Проверить</button>
+        <div id="result5" class="result"></div>
+      </div>
+    </div>
+
+    <div class="task-container">
+      <h2>Вариант 2</h2>
+
+      <div class="task">
+        <label for="task6"
+          >Задача 1: Стеклянный цилиндр объемом 300 см³ частично погружен в
+          воду. Определите архимедову силу, действующую на цилиндр.</label
+        >
+        <input type="number" id="task6" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(6, 0.3)">Проверить</button>
+        <div id="result6" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task7"
+          >Задача 2: Определите архимедову силу, действующую на тело объемом 2,5
+          м³, если оно на треть погружено в воду.</label
+        >
+        <input type="number" id="task7" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(7, 24.75)">Проверить</button>
+        <div id="result7" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task8"
+          >Задача 3: Вычислите подъемную силу, действующую на объект в виде
+          прямоугольного параллелепипеда размером 4 × 4 × 7 см, при его полном
+          погружении в воду.</label
+        >
+        <input type="number" id="task8" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(8, 0.28)">Проверить</button>
+        <div id="result8" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task9"
+          >Задача 4: Деревянный брусок весом 15 Н выталкивает 5 литров воды.
+          Определите подъемную силу, действующую на брусок.</label
+        >
+        <input type="number" id="task9" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(9, 49)">Проверить</button>
+        <div id="result9" class="result"></div>
+      </div>
+
+      <div class="task">
+        <label for="task10"
+          >Задача 5: Тело, полностью погруженное в воду, имеет выталкивающую
+          силу 3 Н. Определите массу этого тела.</label
+        >
+        <input type="number" id="task10" placeholder="Введите ответ" />
+        <button onclick="checkAnswer(10, 0.3)">Проверить</button>
+        <div id="result10" class="result"></div>
+      </div>
+    </div>
+
+    <script>
+      function checkAnswer(taskNumber, correctAnswer) {
+        const userAnswer = parseFloat(
+          document.getElementById("task" + taskNumber).value,
+        );
+        const resultDiv = document.getElementById("result" + taskNumber);
+
+        if (isNaN(userAnswer)) {
+          resultDiv.textContent = "Пожалуйста, введите ответ!";
+          resultDiv.style.color = "orange";
+        } else if (Math.abs(userAnswer - correctAnswer) < 0.01) {
+          resultDiv.textContent = "Правильный ответ!";
+          resultDiv.style.color = "green";
+        } else {
+          resultDiv.textContent = "Неправильный ответ. Попробуйте снова.";
+          resultDiv.style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>
