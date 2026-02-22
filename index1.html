@@ -63,6 +63,66 @@
       nav ul li a:hover {
         color: #ff9800;
       }
+      .statistics-block {
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 500;
+        transition: color 0.5s;
+      }
+
+      /* Стили для формы ввода и подтверждения данных ученика */
+      .student-info {
+        background: rgba(52, 73, 94, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+      }
+
+      .student-info label {
+        font-size: 1.2rem;
+        color: white;
+      }
+
+      .student-info input {
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background: rgba(44, 62, 80, 0.6);
+        color: white;
+        width: 100%;
+      }
+
+      .student-info button {
+        background: #1abc9c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .student-info button:disabled {
+        background-color: #7f8c8d;
+        cursor: not-allowed;
+      }
+
+      .confirmed-info {
+        display: none;
+        margin-top: 20px;
+      }
+
+      .confirmed-info p {
+        margin: 10px 0;
+        font-size: 1.1rem;
+      }
+
+      .confirmed-info span {
+        font-weight: bold;
+      }
 
       /* Стили для карточек с видео и заданиями */
       .video-section {
@@ -246,14 +306,70 @@
         display: block;
         animation: fadeIn 0.5s ease;
       }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      .progress-report {
+        фон: rgba(52, 73, 94, 0.9);
+        граница: 1px сплошная rgba(236, 240, 241, 0.1);
+        радиусграницы: 15px;
+        отступ: 30px;
+        верхнееполе: 50px;
+        теньблока: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .progress-title {
+        размершрифта: 2rem;
+        начертаниешрифта: полужирное;
+        выравниваниетекста: по центру;
+        нижнееполе: 30px;
+        цвет: #ecf0f1;
+        нижняяграница: 2px solid rgba(236, 240, 241, 0.2);
+        нижнийотступ: 15px;
+      }
+      .progress-section {
+        нижнееполе: 30px;
+      }
+      .progress-section h3 {
+        размершрифта: 1.3rem;
+        нижнееполе: 15px;
+        цвет: #1abc9c;
+      }
+      .progress-item {
+        дисплей: flex;
+        выравниваниесодержимого: пробел между;
+        выравниваниеэлементов: по центру;
+        отступ: 10px 15px;
+        нижнийотступ: 8px;
+        фон: rgba(44, 62, 80, 0.6);
+        радиусскругленияграницы: 8px;
+        border-left: 4px сплошная прозрачная;
+      }
+      .progress-item.завершено {
+        border-left-color: #27ae60;
+      }
+      .progress-item.not-completed {
+        border-left-color: #95a5a6;
+        opacity: 0.7;
+      }
+      .progress-grade {
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+        min-width: 40px;
+        text-align: center;
+      }
+      .grade-badge-2 {
+        background: #c62828;
+        color: white;
+      }
+      .grade-badge-3 {
+        background: #c53030;
+        color: white;
+      }
+      .grade-badge-4 {
+        background: #dd6b20;
+        color: white;
+      }
+      .grade-badge-5 {
+        background: #38a169;
+        color: white;
       }
     </style>
   </head>
@@ -270,15 +386,40 @@
         </ul>
       </nav>
 
+      <!-- Формы для ввода данных ученика -->
+      <div class="student-info">
+        <label for="studentNameInput">Ученик:</label>
+        <input
+          type="text"
+          id="studentNameInput"
+          placeholder="Введите имя и фамилию"
+        />
+        <label for="classInput">Класс:</label>
+        <input type="text" id="classInput" placeholder="Введите класс" />
+        <label for="dateInput">Дата:</label>
+        <input type="date" id="dateInput" />
+        <button id="confirmButton">Подтвердить данные</button>
+        <div class="confirmed-info">
+          <p>Ученик: <span id="confirmedStudentName"></span></p>
+          <p>Класс: <span id="confirmedClass"></span></p>
+          <p>Дата: <span id="confirmedDate"></span></p>
+        </div>
+      </div>
+
       <div class="video-section">
         <!-- Видео блоки -->
         <div class="video-card">
           <div class="video-title">Основы линейных уравнений</div>
           <div class="video-placeholder">
-            <div style="text-align: center; color: #666">
-              🎥<br />Видео урок 1<br />
-              <small>Задание: Вставьте описание</small>
-            </div>
+            <iframe
+              src="https://rutube.ru/video/650bcf624492a2278646c5313c268b69/?r=wd"
+              width="100%"
+              height="200"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            >
+            </iframe>
           </div>
           <div class="test-links">
             <button class="test-button" onclick="toggleTest('test1')">
@@ -314,29 +455,14 @@
           </div>
           <div class="test-links">
             <button class="test-button" onclick="toggleTest('test3')">
-              <span>Проверочная работа №4</span> <span class="arrow">▶</span>
-              <span class="test-status">✓</span>
-            </button>
-          </div>
-        </div>
-        <div class="video-card">
-          <div class="video-title">Основы линейных уравнений 2</div>
-          <div class="video-placeholder">
-            <div style="text-align: center; color: #666">
-              🎥<br />Видео урок 2<br />
-              <small>Задание: Вставьте описание</small>
-            </div>
-          </div>
-          <div class="test-links">
-            <button class="test-button" onclick="toggleTest('test2')">
-              <span>Проверочная работа №2</span> <span class="arrow">▶</span>
+              <span>Проверочная работа №3</span> <span class="arrow">▶</span>
               <span class="test-status">✓</span>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Пример для задания -->
+      <!-- Пример задания -->
       <div class="test-content" id="test1">
         <div class="test-title">
           Основы линейных уравнений: Проверочная работа №1
@@ -355,105 +481,56 @@
         </button>
         <div class="result" id="result1"></div>
       </div>
-
-      <!-- Пример для других тестов -->
-      <div class="test-content" id="test2">
-        <!-- Задания для теста 2 -->
-      </div>
-      <div class="test-content" id="test3">
-        <!-- Задания для теста 3 -->
+    </div>
+    <!-- Статистика -->
+    <div class="statistics-block">
+      <div class="statistics-title">📊 Статистика выполнения</div>
+      <div class="statistics-content">
+        <div class="stat-card">
+          <div class="stat-number" id="completedCount">0</div>
+          <div class="stat-label">Выполнено работ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="averageGrade">0</div>
+          <div class="stat-label">Средняя оценка</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="completionPercent">0%</div>
+          <div class="stat-label">Процент выполнения</div>
+        </div>
       </div>
     </div>
+
     <script>
-      document.getElementById("currentDate").textContent =
-        new Date().toLocaleDateString("ru-RU");
+      document
+        .getElementById("confirmButton")
+        .addEventListener("click", function () {
+          // Получаем введенные данные
+          const studentName = document.getElementById("studentNameInput").value;
+          const studentClass = document.getElementById("classInput").value;
+          const studentDate = document.getElementById("dateInput").value;
 
-      function toggleTest(testId) {
-        const allTests = document.querySelectorAll(".test-content");
-        const allButtons = document.querySelectorAll(".test-button");
-        allTests.forEach((test) => {
-          if (test.id !== testId) {
-            test.classList.remove("active");
+          // Проверка на пустые поля
+          if (!studentName || !studentClass || !studentDate) {
+            alert("Пожалуйста, заполните все поля!");
+            return;
           }
+
+          // Записываем подтвержденные данные
+          document.getElementById("confirmedStudentName").textContent =
+            studentName;
+          document.getElementById("confirmedClass").textContent = studentClass;
+          document.getElementById("confirmedDate").textContent = studentDate;
+
+          // Прячем поля ввода и кнопку
+          document.getElementById("studentNameInput").disabled = true;
+          document.getElementById("classInput").disabled = true;
+          document.getElementById("dateInput").disabled = true;
+          document.getElementById("confirmButton").disabled = true;
+
+          // Показываем подтвержденные данные
+          document.querySelector(".confirmed-info").style.display = "block";
         });
-        allButtons.forEach((button) => {
-          if (button.getAttribute("onclick") !== `toggleTest('${testId}')`) {
-            button.classList.remove("active");
-          }
-        });
-
-        const test = document.getElementById(testId);
-        const button = document.querySelector(
-          `[onclick="toggleTest('${testId}')"]`,
-        );
-        if (test.classList.contains("active")) {
-          test.classList.remove("active");
-          button.classList.remove("active");
-        } else {
-          test.classList.add("active");
-          button.classList.add("active");
-        }
-      }
-
-      function checkTest(testId, correctAnswers) {
-        const testNumber = testId.replace("test", "");
-        let correctCount = 0;
-        const userAnswers = [];
-        for (let i = 1; i <= 3; i++) {
-          const input = document.getElementById(`q${testNumber}_${i}`);
-          const userAnswer = parseFloat(input.value);
-          userAnswers.push(userAnswer);
-          if (Math.abs(userAnswer - correctAnswers[i - 1]) < 0.01) {
-            correctCount++;
-            input.style.borderColor = "#48bb78";
-            input.style.backgroundColor = "#f0fff4";
-          } else {
-            input.style.borderColor = "#f56565";
-            input.style.backgroundColor = "#fff5f5";
-          }
-          input.disabled = true;
-        }
-
-        let grade;
-        if (correctCount === 0) {
-          grade = 2;
-        } else if (correctCount === 1) {
-          grade = 3;
-        } else if (correctCount === 2) {
-          grade = 4;
-        } else {
-          grade = 5;
-        }
-
-        const resultDiv = document.getElementById(`result${testNumber}`);
-        let message, className;
-        switch (grade) {
-          case 2:
-            message = "Неудовлетворительно";
-            className = "grade-2";
-            break;
-          case 3:
-            message = "Удовлетворительно";
-            className = "grade-3";
-            break;
-          case 4:
-            message = "Хорошо";
-            className = "grade-4";
-            break;
-          case 5:
-            message = "Отлично";
-            className = "grade-5";
-            break;
-        }
-        resultDiv.innerHTML = `
-          <div>Правильные ответы: ${correctCount} из 3</div>
-          <div>Оценка: ${grade} - ${message}</div>
-          <div style="margin-top: 10px; font-size: 1rem;">
-            ${grade === 5 ? "🎉 Превосходно!" : grade >= 4 ? "👍 Хорошая работа!" : "💪 Продолжайте изучать материал!"}
-          </div>
-        `;
-        resultDiv.className = `show ${className}`;
-      }
     </script>
   </body>
 </html>
